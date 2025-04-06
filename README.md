@@ -30,6 +30,7 @@ pip3 install -r requirements.txt
  - PugDNS     [https://github.com/c3l3si4n/pugdns]
  - httpx     [https://github.com/projectdiscovery/httpx]
  - Notify    [https://github.com/projectdiscovery/notify]
+ - Jq
 
 
 # How to use
