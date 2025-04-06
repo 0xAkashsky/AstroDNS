@@ -3,7 +3,7 @@
 # About
 **AstroDNS** is a high-performance subdomain brute-forcing automation tool that identifies brute-forceable locations within known list of subdomains using a set of predefined rules. AstroDNS processes domains in batches, filters out out-of-scope domains and poisoned DNS responses, runs httpx on the results across the top 30 ports, and notifies only when new subdomains are discovered.
 
-AstroDNS uses [pugDNS](https://github.com/c3l3si4n/pugdns) fastest DNS resolver under the hood for resolving domains. With sufficient bandwidth, resources and a reliable list of public resolvers, it can resolve 1 million of domain within seconds. During testing PugDNS dileverd more results then massDNS.
+AstroDNS uses [pugDNS](https://github.com/c3l3si4n/pugdns) fastest DNS resolver under the hood for resolving domains. With sufficient bandwidth, resources and a reliable list of public resolvers, it can resolve 1 million of domain within seconds. During testing PugDNS delivered more results then massDNS.
 
 <p align="left"><img src="useage.png" width="700"></p>
 
