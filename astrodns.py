@@ -27,7 +27,7 @@ if not os.path.exists(resolvers_file):
     subprocess.run(resolver__download_command,stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def random_filename(extension="txt"):
-    name = "".join(random.choices(string.ascii_lowercase + string.digits, k=4))
+    name = "".join(random.choices(string.ascii_lowercase + string.digits, k=5))
     return f"{name}.{extension}"
 
 ################################################
@@ -258,15 +258,21 @@ def process_domains(domains, wordlist_file):
     print(f"\n❇️ .....PugDNS Completed.......")  
 
     filter_output_txt = "filter_" + random_filename() + ".filter" 
-    final_output_txt = "result_" + random_filename() + ".final" # Replace with actual output file name
-    os.remove(output_file)
+    final_output_txt = "result_" + random_filename() + ".final"
+    
+    if os.path.exists(output_file)
+        os.remove(output_file)
+    
     filter_command = f"""
     jq -c 'select(.ResponseCode == "NOERROR" and (.Answers | length > 0) and (all(.Answers[].Data; test("^10\\\\.") | not))) | {{Domain: .Question[0].Name, IPs: [.Answers[].Data]}}' {output_file_pugdns} \
     | cut -d'"' -f4 \
     | sort -fu > {filter_output_txt}
     """
     subprocess.run(filter_command,shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    os.remove(output_file_pugdns)
+    
+    if os.path.exists(output_file_pugdns):
+        os.remove(output_file_pugdns)
+        
     with open(args.input_file, "r") as f:
         reference_list = f.read().splitlines()
     filter_and_replace_input(filter_output_txt, reference_list)
