@@ -260,7 +260,7 @@ def process_domains(domains, wordlist_file):
     filter_output_txt = "filter_" + random_filename() + ".filter" 
     final_output_txt = "result_" + random_filename() + ".final"
     
-    if os.path.exists(output_file)
+    if os.path.exists(output_file):
         os.remove(output_file)
     
     filter_command = f"""
