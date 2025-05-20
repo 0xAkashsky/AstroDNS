@@ -227,11 +227,11 @@ cleanup_thread.start()
 
 
 #######################################################################################################
-# Section -> Responsible for starting PugDNS.
-# Domains are processed in batches. So that PugDNS doesn't eats all your Memory and to avoid crashes.
+# Section -> Responsible for starting PureDNS.
+# Domains are processed in batches. So that PureDNS doesn't eats all your Memory and to avoid crashes.
 # Script works perfectly at batch size of 4 (6Gb Ram, 4 cpu), You can edit this batch size according to your configuration.
-# This batch is not thread keep it low according to your size of wordlist. eg: 4 domains x Number of words in your wordslists. this amount of possible subdomain will be resolved by PugDNS.
-# If scrtipt crashes in between then considered reducing batch size. (Manual Clean up of PugDNS and httpx process is required if script crashes in between)
+# This batch is not thread keep it low according to your size of wordlist. eg: 4 domains x Number of words in your wordslists. this amount of possible subdomain will be resolved by PureDNS.
+# If scrtipt crashes in between then considered reducing batch size. (Manual Clean up of PureDNS and httpx process is required if script crashes in between)
 ######################################################################################################
 
 def process_domains(domains, wordlist_file):
@@ -250,12 +250,12 @@ def process_domains(domains, wordlist_file):
         out_file.write("\n".join(generated_domains))
 
     output_file_pugdns = "result_" + random_filename() + ".output"
-    pugdns_command = ["pugdns", "-interface", "eth0", "-domains", output_file, "-nameservers", resolvers_file, "-retries", "10", "-workers", "1", "-output", output_file_pugdns]
+    puredns_command = ["puredns", "resolve", output_file, "-r", resolvers_file, "--bin", "massdns", "--write", output_file_pugdns]
 
-    print(f"\n🚀......Starting PugDNS......... 🚀")
+    print(f"\n🚀......Starting PureDNS......... 🚀")
     with open("/dev/null", "w") as fnull:
-        subprocess.run(pugdns_command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    print(f"\n❇️ .....PugDNS Completed.......")  
+        subprocess.run(puredns_command)
+    print(f"\n❇️ .....PureDNS Completed.......")  
 
     filter_output_txt = "filter_" + random_filename() + ".filter" 
     final_output_txt = "result_" + random_filename() + ".final"
@@ -264,9 +264,7 @@ def process_domains(domains, wordlist_file):
         os.remove(output_file)
     
     filter_command = f"""
-    jq -c 'select(.ResponseCode == "NOERROR" and (.Answers | length > 0) and (all(.Answers[].Data; test("^10\\\\.") | not))) | {{Domain: .Question[0].Name, IPs: [.Answers[].Data]}}' {output_file_pugdns} \
-    | cut -d'"' -f4 \
-    | sort -fu > {filter_output_txt}
+    cat {output_file_pugdns} | sort -fu > {filter_output_txt}
     """
     subprocess.run(filter_command,shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
