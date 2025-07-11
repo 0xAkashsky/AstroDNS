@@ -52,3 +52,6 @@ pip3 install -r requirements.txt
 I made this AstroDNS to automate resolving based on my rules and using Puredns tool for resolving in thunder speed. Please edit the script according to your needs (there could be more better ways to highly optimize the script)
 
 Credits to all infosec tools mentioned above in Prerequisite section.
+
+![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/0xAkashsky/AstroDNS&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=visits&edge_flat=false)
+
