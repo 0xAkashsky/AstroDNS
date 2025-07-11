@@ -53,5 +53,5 @@ I made this AstroDNS to automate resolving based on my rules and using Puredns t
 
 Credits to all infosec tools mentioned above in Prerequisite section.
 
-![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/0xAkashsky/AstroDNS&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=visits&edge_flat=false)
+![Views](https://komarev.com/ghpvc/?username=YOUR_USERNAME&repo=YOUR_REPO)
 
